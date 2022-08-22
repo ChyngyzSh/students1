@@ -16,12 +16,4 @@ public class Teacher {
     String name;
     String surname;
     String title;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

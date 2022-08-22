@@ -1,22 +1,20 @@
-package kg.megacom.students1.mappers.impl;
+package kg.megacom.students1.mappers.v2.impl;
 
-import kg.megacom.students1.mappers.GroupMapper;
-import kg.megacom.students1.mappers.PaymentMapper;
-import kg.megacom.students1.mappers.StudentMapper;
+import kg.megacom.students1.mappers.v2.GroupMapper2;
+import kg.megacom.students1.mappers.v2.PaymentMapper2;
+import kg.megacom.students1.mappers.v2.StudentMapper2;
 import kg.megacom.students1.models.Payment;
-import kg.megacom.students1.models.Teacher;
-import kg.megacom.students1.models.dto.PaymentDto;
-import kg.megacom.students1.models.dto.TeacherDto;
+import kg.megacom.students1.models.dto.PaymentDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentMapperImpl implements PaymentMapper {
-    GroupMapper groupMapper;
-    StudentMapper studentMapper;
+public class PaymentMapperImpl implements PaymentMapper2 {
+    GroupMapper2 groupMapper;
+    StudentMapper2 studentMapper;
 
     @Override
-    public Payment fromDto(PaymentDto paymentDto) {
+    public Payment fromDto(PaymentDTO paymentDto) {
         Payment payment = new Payment();
         payment.setId(paymentDto.getId());
         payment.setGroup(groupMapper.fromDto(paymentDto.getGroup()));
@@ -27,8 +25,8 @@ public class PaymentMapperImpl implements PaymentMapper {
     }
 
     @Override
-    public PaymentDto toDto(Payment payment) {
-        PaymentDto paymentDto = new PaymentDto();
+    public PaymentDTO toDto(Payment payment) {
+        PaymentDTO paymentDto = new PaymentDTO();
         paymentDto.setId(payment.getId());
         paymentDto.setGroup(groupMapper.toDto(payment.getGroup()));
         paymentDto.setStudent(studentMapper.toDto(payment.getStudent()));
@@ -38,9 +36,9 @@ public class PaymentMapperImpl implements PaymentMapper {
     }
 
     @Override
-    public List<Payment> fromDtos(List<PaymentDto> paymentDtos) {
+    public List<Payment> fromDtos(List<PaymentDTO> paymentDtos) {
         List<Payment>payments = new ArrayList<>();
-        for (PaymentDto item : paymentDtos) {
+        for (PaymentDTO item : paymentDtos) {
             Payment payment = fromDto(item);
             payments.add(payment);
         }
@@ -48,10 +46,10 @@ public class PaymentMapperImpl implements PaymentMapper {
     }
 
     @Override
-    public List<PaymentDto> toDtos(List<Payment> payments) {
-        List<PaymentDto>paymentDtos = new ArrayList<>();
+    public List<PaymentDTO> toDtos(List<Payment> payments) {
+        List<PaymentDTO>paymentDtos = new ArrayList<>();
         for (Payment item : payments) {
-            PaymentDto paymentDto = toDto(item);
+            PaymentDTO paymentDto = toDto(item);
             paymentDtos.add(paymentDto);
         }
         return paymentDtos;

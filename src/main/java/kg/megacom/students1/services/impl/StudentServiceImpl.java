@@ -1,25 +1,49 @@
 package kg.megacom.students1.services.impl;
 
+import kg.megacom.students1.mappers.StudentMapper;
 import kg.megacom.students1.models.Student;
+import kg.megacom.students1.models.dto.StudentDTO;
 import kg.megacom.students1.services.StudentService;
 import kg.megacom.students1.repositories.StudentRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    StudentRepo studentRepo;
+    private final StudentRepo studentRepo;
+    private final StudentMapper studentMapper;
+
+    public StudentServiceImpl(StudentRepo studentRepo, StudentMapper studentMapper) {
+        this.studentRepo = studentRepo;
+        this.studentMapper = studentMapper;
+    }
+
 
     @Override
-    public Student createStudent(Student student) {
-        //Student newStudent =  new Student();
-        student.setId(student.getId());
-        student.setName(student.getName());
-        student.setSurname(student.getSurname());
-        student.setTitle(student.getTitle());
+    public StudentDTO createStudent(Student student) {
+
         studentRepo.save(student);
+        return studentMapper.toDTO(student);
+    }
+
+    @Override
+    public List<StudentDTO> findAll() {
+        List<Student>studentList=studentRepo.findAll();
+        return studentMapper.toDTOList(studentList);
+    }
+
+    @Override
+    public Student update(Student student) {
+//        if(student.getId()== null){
+//            studentRepo.save(student);
+//        }else
+//            studentRepo.update(student);
+        //studentRepo.save(student);
+        return studentRepo.save(student);
+    }
+}
 
 //        Student newStudent =  new Student();
 //        newStudent.setId(student.getId());
@@ -27,7 +51,3 @@ public class StudentServiceImpl implements StudentService {
 //        newStudent.setSurname(student.getSurname());
 //        newStudent.setTitle(student.getTitle());
 //        studentRepo.save(newStudent);
-
-        return student;
-    }
-}

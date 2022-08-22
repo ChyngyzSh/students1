@@ -1,22 +1,20 @@
-package kg.megacom.students1.mappers.impl;
+package kg.megacom.students1.mappers.v2.impl;
 
-import kg.megacom.students1.mappers.CourseMapper;
-import kg.megacom.students1.mappers.GroupMapper;
-import kg.megacom.students1.mappers.TeacherMapper;
-import kg.megacom.students1.models.Course;
+import kg.megacom.students1.mappers.v2.CourseMapper2;
+import kg.megacom.students1.mappers.v2.GroupMapper2;
+import kg.megacom.students1.mappers.v2.TeacherMapper2;
 import kg.megacom.students1.models.Group;
-import kg.megacom.students1.models.dto.CourseDto;
-import kg.megacom.students1.models.dto.GroupDto;
+import kg.megacom.students1.models.dto.GroupDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupMapperImpl implements GroupMapper {
-    CourseMapper courseMapper;
-    TeacherMapper teacherMapper;
+public class GroupMapperImpl implements GroupMapper2 {
+    CourseMapper2 courseMapper;
+    TeacherMapper2 teacherMapper;
 
     @Override
-    public Group fromDto(GroupDto groupDto) {
+    public Group fromDto(GroupDTO groupDto) {
         Group group = new Group();
         group.setId(groupDto.getId());
         group.setName(groupDto.getName());
@@ -28,8 +26,8 @@ public class GroupMapperImpl implements GroupMapper {
     }
 
     @Override
-    public GroupDto toDto(Group group) {
-        GroupDto groupDto = new GroupDto();
+    public GroupDTO toDto(Group group) {
+        GroupDTO groupDto = new GroupDTO();
         groupDto.setId(group.getId());
         groupDto.setName(group.getName());
         groupDto.setCourse(courseMapper.toDto(group.getCourse()));
@@ -41,9 +39,9 @@ public class GroupMapperImpl implements GroupMapper {
         return groupDto;
     }
     @Override
-    public List<Group> fromDtos(List<GroupDto> groupDtos) {
+    public List<Group> fromDtos(List<GroupDTO> groupDtos) {
         List<Group>groups = new ArrayList<>();
-        for (GroupDto item : groupDtos) {
+        for (GroupDTO item : groupDtos) {
             Group group = fromDto(item);
             groups.add(group);
         }
@@ -51,10 +49,10 @@ public class GroupMapperImpl implements GroupMapper {
     }
 
     @Override
-    public List<GroupDto> toDtos(List<Group> groups) {
-        List<GroupDto>groupDtos = new ArrayList<>();
+    public List<GroupDTO> toDtos(List<Group> groups) {
+        List<GroupDTO>groupDtos = new ArrayList<>();
         for (Group item : groups) {
-            GroupDto groupDto = toDto(item);
+            GroupDTO groupDto = toDto(item);
             groupDtos.add(groupDto);
         }
         return groupDtos;

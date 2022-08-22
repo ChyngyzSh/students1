@@ -1,39 +1,32 @@
 package kg.megacom.students1.services.impl;
 
-import kg.megacom.students1.models.Course;
+import kg.megacom.students1.mappers.GroupMapper;
 import kg.megacom.students1.models.Group;
+import kg.megacom.students1.models.dto.GroupDTO;
 import kg.megacom.students1.repositories.GroupRepo;
 import kg.megacom.students1.services.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class GroupServiceImpl implements GroupService {
-    @Autowired
-    GroupRepo groupRepo;
+//    @Autowired
+//    GroupRepo groupRepo;
+    private final GroupRepo groupRepo;
+
+    private final GroupMapper groupMapper;
+
+    public GroupServiceImpl(GroupRepo groupRepo, GroupMapper groupMapper) {
+        this.groupRepo = groupRepo;
+        this.groupMapper = groupMapper;
+    }
 
     @Override
-    public Group createGroup(Group group) {
-        group.setId(group.getId());
-        group.setName(group.getName());
-        group.setCourse(group.getCourse());
-        group.setTeacher(group.getTeacher());
-        group.setStartDate(group.getStartDate());
-        group.setEndDate(group.getEndDate());
-        groupRepo.save(group);
+    public GroupDTO createGroup(Group group) {
 
-//        Group newGroup = new Group();
-//        Course course=new Course();
-//        newGroup.setId(group.getId());
-//        newGroup.setName(group.getName());
-//        newGroup.setCourse(group.getCourse());
-//        newGroup.setTeacher(group.getTeacher());
-//        newGroup.setStartDate(group.getStartDate());
-//        newGroup.setEndDate(group.getEndDate());
-//        groupRepo.save(newGroup);
-        return group;
+        groupRepo.save(group);
+        return groupMapper.toDTO(group);
     }
 
     @Override

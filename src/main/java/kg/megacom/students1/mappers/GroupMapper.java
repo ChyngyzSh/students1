@@ -1,17 +1,36 @@
 package kg.megacom.students1.mappers;
 
-import kg.megacom.students1.models.Course;
 import kg.megacom.students1.models.Group;
-import kg.megacom.students1.models.dto.CourseDto;
-import kg.megacom.students1.models.dto.GroupDto;
+import kg.megacom.students1.models.dto.GroupDTO;
+import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Mapper;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-public interface GroupMapper {
+@Component
+@Mapper
+@RequiredArgsConstructor
+public class GroupMapper {
+    private final ModelMapper modelMapper;
+    public Group toEntity(GroupDTO groupDTO){
+        return Objects.isNull(groupDTO) ? null: modelMapper.map(groupDTO, Group.class);
+    }
 
-    Group fromDto(GroupDto groupDto);
-    GroupDto toDto(Group  group);
-
-    List<Group> fromDtos(List<GroupDto>groupDtos);
-    List<GroupDto> toDtos(List<Group>groups);
+    public GroupDTO toDTO(Group group){
+        return Objects.isNull(group) ? null : modelMapper.map(group, GroupDTO.class);
+    }
+    public List<GroupDTO> toDTOList(List<Group>groupList){
+        return groupList.stream()
+                .map(group -> modelMapper.map(group, GroupDTO.class))
+                .collect(Collectors.toList());
+    }
+    public List<Group> toEntityList(List<GroupDTO>groupDTOList){
+        return groupDTOList.stream()
+                .map(groupDTO -> modelMapper.map(groupDTO, Group.class))
+                .collect(Collectors.toList());
+    }
 }

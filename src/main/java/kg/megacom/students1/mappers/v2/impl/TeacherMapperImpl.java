@@ -1,15 +1,15 @@
-package kg.megacom.students1.mappers.impl;
+package kg.megacom.students1.mappers.v2.impl;
 
-import kg.megacom.students1.mappers.TeacherMapper;
+import kg.megacom.students1.mappers.v2.TeacherMapper2;
 import kg.megacom.students1.models.Teacher;
-import kg.megacom.students1.models.dto.TeacherDto;
+import kg.megacom.students1.models.dto.TeacherDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherMapperImpl implements TeacherMapper {
+public class TeacherMapperImpl implements TeacherMapper2 {
     @Override
-    public Teacher fromDto(TeacherDto teacherDto) {
+    public Teacher fromDto(TeacherDTO teacherDto) {
         Teacher teacher = new Teacher();
         teacher.setId(teacherDto.getId());
         teacher.setName(teacherDto.getName());
@@ -19,8 +19,8 @@ public class TeacherMapperImpl implements TeacherMapper {
     }
 
     @Override
-    public TeacherDto toDto(Teacher teacher) {
-        TeacherDto teacherDto = new TeacherDto();
+    public TeacherDTO toDto(Teacher teacher) {
+        TeacherDTO teacherDto = new TeacherDTO();
         teacherDto.setId(teacher.getId());
         teacherDto.setName(teacher.getName());
         teacherDto.setSurname(teacher.getSurname());
@@ -29,9 +29,9 @@ public class TeacherMapperImpl implements TeacherMapper {
     }
 
     @Override
-    public List<Teacher> fromDtos(List<TeacherDto> teacherDtos) {
+    public List<Teacher> fromDtos(List<TeacherDTO> teacherDtos) {
         List<Teacher>teachers = new ArrayList<>();
-        for (TeacherDto item : teacherDtos) {
+        for (TeacherDTO item : teacherDtos) {
             Teacher teacher = fromDto(item);
             teachers.add(teacher);
         }
@@ -39,10 +39,10 @@ public class TeacherMapperImpl implements TeacherMapper {
     }
 
     @Override
-    public List<TeacherDto> toDtos(List<Teacher> teachers) {
-        List<TeacherDto>teacherDtos = new ArrayList<>();
+    public List<TeacherDTO> toDtos(List<Teacher> teachers) {
+        List<TeacherDTO>teacherDtos = new ArrayList<>();
         for (Teacher item: teachers) {
-            TeacherDto teacherDto = toDto(item);
+            TeacherDTO teacherDto = toDto(item);
             teacherDtos.add(teacherDto);
         }
         return teacherDtos;

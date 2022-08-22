@@ -1,5 +1,6 @@
 package kg.megacom.students1.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -23,11 +24,14 @@ public class Group {
     @JoinColumn(name = "course_id")
     Course course;
 
-    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "teacher_id")
     Teacher teacher;
 
+    //@JsonFormat(pattern = "yyyy-MM-dd")
     Date startDate;
+    //@JsonFormat(pattern = "yyyy-MM-dd")
     Date endDate;
+
+
 }

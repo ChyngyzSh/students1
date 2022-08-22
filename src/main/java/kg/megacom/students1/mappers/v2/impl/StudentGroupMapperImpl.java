@@ -1,23 +1,20 @@
-package kg.megacom.students1.mappers.impl;
+package kg.megacom.students1.mappers.v2.impl;
 
-import kg.megacom.students1.mappers.GroupMapper;
-import kg.megacom.students1.mappers.StudentGroupMapper;
-import kg.megacom.students1.mappers.StudentMapper;
-import kg.megacom.students1.models.Payment;
+import kg.megacom.students1.mappers.v2.GroupMapper2;
+import kg.megacom.students1.mappers.v2.StudentGroupMapper2;
+import kg.megacom.students1.mappers.v2.StudentMapper2;
 import kg.megacom.students1.models.StudentGroup;
-import kg.megacom.students1.models.Teacher;
-import kg.megacom.students1.models.dto.StudentGroupDto;
-import kg.megacom.students1.models.dto.TeacherDto;
+import kg.megacom.students1.models.dto.StudentGroupDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentGroupMapperImpl implements StudentGroupMapper {
-    GroupMapper groupMapper;
-    StudentMapper studentMapper;
+public class StudentGroupMapperImpl implements StudentGroupMapper2 {
+    GroupMapper2 groupMapper;
+    StudentMapper2 studentMapper;
 
     @Override
-    public StudentGroup fromDto(StudentGroupDto studentGroupDto) {
+    public StudentGroup fromDto(StudentGroupDTO studentGroupDto) {
         StudentGroup studentGroup = new StudentGroup();
         studentGroup.setId(studentGroupDto.getId());
         studentGroup.setStudent(studentMapper.fromDto(studentGroupDto.getStudent()));
@@ -29,8 +26,8 @@ public class StudentGroupMapperImpl implements StudentGroupMapper {
     }
 
     @Override
-    public StudentGroupDto toDto(StudentGroup studentGroup) {
-        StudentGroupDto studentGroupDto = new StudentGroupDto();
+    public StudentGroupDTO toDto(StudentGroup studentGroup) {
+        StudentGroupDTO studentGroupDto = new StudentGroupDTO();
         studentGroupDto.setId(studentGroup.getId());
         studentGroupDto.setStudent(studentMapper.toDto(studentGroup.getStudent()));
         studentGroupDto.setGroup(groupMapper.toDto(studentGroup.getGroup()));
@@ -41,9 +38,9 @@ public class StudentGroupMapperImpl implements StudentGroupMapper {
     }
 
     @Override
-    public List<StudentGroup> fromDtos(List<StudentGroupDto> studentGroupDtos) {
+    public List<StudentGroup> fromDtos(List<StudentGroupDTO> studentGroupDtos) {
         List<StudentGroup>studentGroups = new ArrayList<>();
-        for (StudentGroupDto item : studentGroupDtos) {
+        for (StudentGroupDTO item : studentGroupDtos) {
             StudentGroup studentGroup = fromDto(item);
             studentGroups.add(studentGroup);
         }
@@ -51,10 +48,10 @@ public class StudentGroupMapperImpl implements StudentGroupMapper {
     }
 
     @Override
-    public List<StudentGroupDto> toDtos(List<StudentGroup> studentGroups) {
-        List<StudentGroupDto>studentGroupDtos = new ArrayList<>();
+    public List<StudentGroupDTO> toDtos(List<StudentGroup> studentGroups) {
+        List<StudentGroupDTO>studentGroupDtos = new ArrayList<>();
         for (StudentGroup item: studentGroups) {
-            StudentGroupDto studentGroupDto = toDto(item);
+            StudentGroupDTO studentGroupDto = toDto(item);
             studentGroupDtos.add(studentGroupDto);
         }
         return studentGroupDtos;

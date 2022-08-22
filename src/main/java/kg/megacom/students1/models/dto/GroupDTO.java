@@ -1,18 +1,22 @@
 package kg.megacom.students1.models.dto;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class GroupDto {
+public class GroupDTO {
     Long id;
     String name;
-    CourseDto course;
-    TeacherDto teacher;
+    CourseDTO course;
+    TeacherDTO teacher;
     Date startDate;
     Date endDate;
 }

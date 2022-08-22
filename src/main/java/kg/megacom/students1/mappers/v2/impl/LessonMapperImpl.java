@@ -1,20 +1,18 @@
-package kg.megacom.students1.mappers.impl;
+package kg.megacom.students1.mappers.v2.impl;
 
-import kg.megacom.students1.mappers.GroupMapper;
-import kg.megacom.students1.mappers.LessonMapper;
+import kg.megacom.students1.mappers.v2.GroupMapper2;
+import kg.megacom.students1.mappers.v2.LessonMapper2;
 import kg.megacom.students1.models.Lesson;
-import kg.megacom.students1.models.Teacher;
-import kg.megacom.students1.models.dto.LessonDto;
-import kg.megacom.students1.models.dto.TeacherDto;
+import kg.megacom.students1.models.dto.LessonDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LessonMapperImpl implements LessonMapper {
-    GroupMapper groupMapper;
+public class LessonMapperImpl implements LessonMapper2 {
+    GroupMapper2 groupMapper;
 
     @Override
-    public Lesson fromDto(LessonDto lessonDto) {
+    public Lesson fromDto(LessonDTO lessonDto) {
         Lesson lesson = new Lesson();
         lesson.setId(lessonDto.getId());
         lesson.setDay(lessonDto.getDay());
@@ -23,8 +21,8 @@ public class LessonMapperImpl implements LessonMapper {
     }
 
     @Override
-    public LessonDto toDto(Lesson lesson) {
-        LessonDto lessonDto = new LessonDto();
+    public LessonDTO toDto(Lesson lesson) {
+        LessonDTO lessonDto = new LessonDTO();
         lessonDto.setId(lesson.getId());
         lessonDto.setDay(lesson.getDay());
         lessonDto.setGroup(groupMapper.toDto(lesson.getGroup()));
@@ -32,9 +30,9 @@ public class LessonMapperImpl implements LessonMapper {
     }
 
     @Override
-    public List<Lesson> fromDtos(List<LessonDto> lessonDtos) {
+    public List<Lesson> fromDtos(List<LessonDTO> lessonDtos) {
         List<Lesson>lessons = new ArrayList<>();
-        for (LessonDto item : lessonDtos) {
+        for (LessonDTO item : lessonDtos) {
             Lesson lesson = fromDto(item);
             lessons.add(lesson);
         }
@@ -42,10 +40,10 @@ public class LessonMapperImpl implements LessonMapper {
     }
 
     @Override
-    public List<LessonDto> toDtos(List<Lesson> lessons) {
-        List<LessonDto>lessonDtos = new ArrayList<>();
+    public List<LessonDTO> toDtos(List<Lesson> lessons) {
+        List<LessonDTO>lessonDtos = new ArrayList<>();
         for (Lesson item: lessons) {
-            LessonDto lessonDto = toDto(item);
+            LessonDTO lessonDto = toDto(item);
             lessonDtos.add(lessonDto);
         }
         return lessonDtos;
