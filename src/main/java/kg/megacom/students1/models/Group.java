@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -28,9 +30,9 @@ public class Group {
     @JoinColumn(name = "teacher_id")
     Teacher teacher;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     Date startDate;
-    //@JsonFormat(pattern = "yyyy-MM-dd")
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     Date endDate;
 
 

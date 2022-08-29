@@ -15,8 +15,10 @@ import java.util.Date;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentDTO {
     Long id;
-    GroupDTO group;
-    StudentDTO student;
     Date paymentDate;
+    StudentDTO student;
+    double installment;
+    //double debt;
+    GroupDTO group;
     PaymentStatus status;
 }

@@ -26,8 +26,34 @@ public class StudentController {
         return studentService.findAll();
     }
 
+    @GetMapping("/allDeleted")
+    public List<Student> findAllDeleted(){
+        return studentService.findDeleted();
+    }
+
     @PutMapping("/update")
     public Student updateStudent(@RequestBody Student student){
         return studentService.update(student);
     }
+    @PutMapping("/update2")
+    public Student updateByID(@RequestParam Long id, @RequestParam String title){
+        return studentService.update2(id, title);
+    }
+
+    @PutMapping("/update3")
+    public Student updateByID2(@RequestParam Long id, @RequestParam String title){
+        return studentService.update3(id, title);
+    }
+
+    @DeleteMapping("/delete")
+    public void delete (@RequestParam Long id){
+        studentService.delete(id);
+    }
+    @DeleteMapping("/delete2")
+    public Student delete2 (@RequestParam Long id){
+        return studentService.delete2(id);
+    }
+
+
+
 }

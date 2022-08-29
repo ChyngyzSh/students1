@@ -8,6 +8,7 @@ import kg.megacom.students1.repositories.StudentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -19,7 +20,6 @@ public class StudentServiceImpl implements StudentService {
         this.studentRepo = studentRepo;
         this.studentMapper = studentMapper;
     }
-
 
     @Override
     public StudentDTO createStudent(Student student) {
@@ -36,13 +36,47 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student update(Student student) {
-//        if(student.getId()== null){
-//            studentRepo.save(student);
-//        }else
-//            studentRepo.update(student);
-        //studentRepo.save(student);
         return studentRepo.save(student);
     }
+
+    @Override
+    public Student update2(Long id, String title) {
+
+        studentRepo.update(id, title);
+        return studentRepo.findById(id).get();
+    }
+
+    @Override
+    public Student update3(Long id, String title) {
+        Optional<Student> student = studentRepo.findById(id);
+        student.get().setTitle(title);
+        return studentRepo.save(student.get());
+    }
+
+    @Override
+    public void delete(Long id) {
+        studentRepo.delete(studentRepo.findById(id).get()); // 1-version
+    }
+
+    @Override
+    public Student delete2(Long id) { // 2-version
+        Student student = studentRepo.findById(id).get();
+        student.setDeleted(true);
+        studentRepo.save(student);
+        return studentRepo.findById(id).get();
+    }
+
+    @Override
+    public List<Student> findDeleted(){
+        return  studentRepo.findAllByIsDeletedIsTrue();
+    }
+
+    @Override
+    public Student findByID(Long studentId) {
+        return studentRepo.findById(studentId).orElseThrow();
+    }
+
+
 }
 
 //        Student newStudent =  new Student();

@@ -10,4 +10,6 @@ public interface CourseService {
     CourseDTO createCourse(Course course);
 
     List<Course> findAll();
+
+    Course fyndById(Long id);
 }

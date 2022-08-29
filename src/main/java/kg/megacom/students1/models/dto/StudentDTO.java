@@ -15,4 +15,6 @@ public class StudentDTO {
     String name;
     String surname;
     String title;
+    boolean isDeleted;
+    //double debt=0;
 }

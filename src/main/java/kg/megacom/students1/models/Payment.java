@@ -4,6 +4,8 @@ import kg.megacom.students1.models.enums.PaymentStatus;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,15 +19,20 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    Group group;
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
+    Date paymentDate;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
     Student student;
 
-    Date paymentDate;
+    double installment;
+    //double debt;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    Group group;
+
     @Enumerated(value = EnumType.STRING)
     PaymentStatus status;
 }
